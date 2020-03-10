@@ -1,0 +1,180 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+      <!--layout:decorate="~{layouts/master}">-->
+<!--<head>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div layout:fragment="content">-->
+    <!--&lt;!&ndash;Navbar &ndash;&gt;-->
+    <!--<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">-->
+
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"-->
+                <!--aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--<span class="navbar-toggler-icon"></span>-->
+        <!--</button>-->
+        <!--<div class="collapse navbar-collapse" id="navbarSupportedContent-333">-->
+
+            <!--<ul class="navbar-nav ml-auto nav-flex-icons">-->
+                <!--<li class="nav-item">-->
+                    <!--<a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modalDefaultContactForm">-->
+                        <!--CREATE-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="nav-item">-->
+                    <!--<a class="nav-link waves-effect waves-light">-->
+                        <!--<i class="fas fa-plus-circle" data-toggle="modal" data-target="#modalDefaultContactForm"></i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li class="nav-item dropdown">-->
+                    <!--<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"-->
+                       <!--aria-expanded="false">-->
+                        <!--category-->
+                    <!--</a>-->
+                    <!--<div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">-->
+                        <!--<button class="dropdown-item" onclick="alert()">Action</button>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</nav>-->
+    <!--&lt;!&ndash;/.Navbar &ndash;&gt;-->
+    <!--<table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th class="th-sm">Name-->
+            <!--</th>-->
+            <!--<th class="th-sm">Position-->
+            <!--</th>-->
+            <!--<th class="th-sm">Office-->
+            <!--</th>-->
+            <!--<th class="th-sm">Agezzzzzzzzzzzzzz-->
+            <!--</th>-->
+            <!--<th class="th-sm">Start date-->
+            <!--</th>-->
+            <!--<th class="th-sm">Salary-->
+            <!--</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+
+        <!--<tr>-->
+            <!--<td>Donna Snider</td>-->
+            <!--<td>Customer Support</td>-->
+            <!--<td>New York</td>-->
+            <!--<td>27</td>-->
+            <!--<td>2011/01/25</td>-->
+            <!--<td>$112,000</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--<tfoot>-->
+        <!--<tr>-->
+            <!--<th>Name-->
+            <!--</th>-->
+            <!--<th>Position-->
+            <!--</th>-->
+            <!--<th>Office-->
+            <!--</th>-->
+            <!--<th>Age-->
+            <!--</th>-->
+            <!--<th>Start date-->
+            <!--</th>-->
+            <!--<th>Salary-->
+            <!--</th>-->
+        <!--</tr>-->
+        <!--</tfoot>-->
+    <!--</table>-->
+    <!--<div class="modal fade" id="modalDefaultContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+        <!--&lt;!&ndash;Modal: Contact form&ndash;&gt;-->
+        <!--<div class="modal-dialog cascading-modal" role="document">-->
+
+            <!--&lt;!&ndash;Content&ndash;&gt;-->
+            <!--<div class="modal-content">-->
+
+                <!--&lt;!&ndash;Header&ndash;&gt;-->
+                <!--<div class="modal-header info-color white-text">-->
+                    <!--<h4 class="title">-->
+                        <!--<i class="fas fa-plus-circle"></i> Create Book</h4>-->
+                    <!--<button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">×</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;Body&ndash;&gt;-->
+                <!--<div class="modal-body">-->
+
+
+                    <!--<label for="qrcode">QRCODE</label>-->
+                    <!--<input type="text" id="qrcode" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+
+                    <!--<label for="category">Category</label>-->
+                    <!--<select class="browser-default custom-select" id="category">-->
+                        <!--<option selected>category</option>-->
+                        <!--<option value="1">One</option>-->
+                        <!--<option value="2">Two</option>-->
+                        <!--<option value="3">Three</option>-->
+                    <!--</select>-->
+
+                    <!--<br><br>-->
+
+                    <!--<label for="author">author</label>-->
+                    <!--<input type="text" id="author" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<label for="isbn">isbn</label>-->
+                    <!--<input type="text" id="isbn" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<label for="page">page</label>-->
+                    <!--<input type="text" id="page" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<label for="personal">personal</label>-->
+                    <!--<input type="text" id="personal" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<label for="publisher">publisher</label>-->
+                    <!--<input type="text" id="publisher" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<label for="title">title</label>-->
+                    <!--<input type="text" id="title" class="form-control form-control-sm">-->
+
+                    <!--<br>-->
+
+                    <!--<div class="text-center mt-4 mb-2">-->
+                        <!--<button class="btn btn-info">create-->
+                            <!--<i class="fa fa-send ml-2"></i>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;/.Content&ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash;/Modal: Contact form&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+<!--<script layout:fragment="script">-->
+    <!--$(document).ready(function () {-->
+        <!--$('#dtBasicExample').DataTable();-->
+        <!--$('.dataTables_length').addClass('bs-select');-->
+        <!--function alert(){-->
+            <!--alert("hello")-->
+        <!--}-->
+    <!--});-->
+
+<!--</script>-->
+
+<!--</body>-->
+
+
+<!--</html>-->

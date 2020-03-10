@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>LIBRARY MANAGEMENT SYSTEM</title>
+    <link rel="icon" type="image/ico" href="https://cdn4.iconfinder.com/data/icons/eldorado-culture/40/books_2-512.png" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- MDBootstrap Datatables  -->
+    <link href="/css/addons/datatables.min.css" rel="stylesheet">
+
+</head>
+
+<!-- Start your project here-->
+<body class="grey lighten-3">
+
+<div th:replace="fragments/header::fr-header"></div>
+
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+
+    <div class="container-fluid mt-5" layout:fragment="content">
+
+    </div>
+
+
+</main>
+<!--Main layout-->
+
+<!--Footer-->
+
+<!--/.Footer-->
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="/js/mdb.js"></script>
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="/js/addons/datatables.min.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
+<script layout:fragment="script"></script>
+
+</body>
+<!--<div th:replace="fragments/footer::fr-footer"></div>-->
+
+
+</html>

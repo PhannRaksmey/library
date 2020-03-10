@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" >
+<head>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <form class="needs-validation" th:object="${member}" novalidate method="post" action="/admin/member/update/submit" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom01">Name</label>
+                <input type="text" th:field="*{name}" class="form-control" id="validationCustom01" placeholder="Name"
+                       required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom02">Position</label>
+                <select class="browser-default custom-select" name="carrer">
+                    <option value="student" selected>Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="staff">Staff</option>
+                </select>
+
+<!--                <label for="validationCustom02">ID card <span th:if="${error==true && errorType=='id'}" style="color: red">:Already exited </span></label>-->
+                <input type="hidden" class="form-control"  th:field="*{id}" id="validationCustom02" placeholder="ID Card"
+                       required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom05">Gender</label>
+                <input type="text" class="form-control" th:field="*{sex}" id="validationgender" placeholder="Gender" required>
+                <div class="invalid-feedback">
+                    Please provide gender.
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom04">Major</label>
+                <input type="text" class="form-control" th:field="*{major}" id="validationMajor" placeholder="Major" required>
+                <div class="invalid-feedback">
+                    Please input major.
+                </div>
+            </div>
+
+            <!--<div class="col-md-4 mb-3">-->
+            <!--<label for="validationCustomUsername">Contact</label>-->
+            <!--<div class="input-group">-->
+            <!--<div class="input-group-prepend">-->
+            <!--<span class="input-group-text" id="inputGroupPrepend"></span>-->
+            <!--</div>-->
+            <!--<input type="email" class="form-control" id="validationCustomUsername" placeholder="Phone number and Email"-->
+            <!--aria-describedby="inputGroupPrepend" required>-->
+            <!--<div class="invalid-feedback">-->
+            <!--Invalid email-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom03">Contact</label>
+                <input type="text" th:field="*{contact}" class="form-control" id="validationCustom03" placeholder="Contact" required>
+                <!--                <textarea name="contact"></textarea>-->
+                <div class="invalid-feedback">
+                    Please provide a valid contact.
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom04">Section</label>
+                <input type="text" class="form-control" th:field="*{section}" id="validationCustom04" placeholder="section" required>
+                <div class="invalid-feedback">
+                    Please input section.
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom03">Year</label>
+                <input type="number" th:field="*{year}"class="form-control" id="validationsection" placeholder="Year" required>
+                <div class="invalid-feedback">
+                    Please provide a valid year.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload Photo</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-sm" type="submit">Update form</button>
+    </form>
+</div>
+<script layout:fragment="script">
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    $(".delete").click(function () {
+        var data_id = $(this).attr("book-id");
+        swal({
+            title: "Are you sure to delete book ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/api/v1/book/delete/" + data_id,
+                    type: "DELETE",
+                    success: function (response) {
+
+                        swal("Poof! Your success Delete It", {
+                            icon: "success",
+                        }).then(function () {
+                            location.reload();
+                        });
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+
+            }
+            else {
+                swal("You Have Cancel!");
+    }
+    });
+
+    });
+</script>
+
+</body>
+
+
+</html>

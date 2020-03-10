@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/master}" >
+<head>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+                aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modalDefaultContactForm">
+                      CREATE
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light">
+                        <i class="fas fa-plus-circle" data-toggle="modal" data-target="#modalDefaultContactForm"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        CATEGORY
+                    </a>
+                    <!--<input type="hidden" th:value="${#authentication.principal.name}" name="adminId" >-->
+                    <!--Roles: <span sec:authentication="principal.id"></span>-->
+                    <!--Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+                    <!--<input type="hidden" id="adminId" sec:authentication="name"></input>-->
+
+                    <!--<th:block th:each="profile : ${profilelist}">-->
+                        <!--<div onclick="selectionChanged(this)" class="user-pf-block" th:url="${profile.imageUrl}" th:style="'box-sizing: border-box;background-size:cover;background-image: url('+@{${profile.imageUrl}}+');margin: 5px;height: 150px;width: 150px;float: left'"></div>-->
+                    <!--</th:block>-->
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                        <a th:each="cate : ${cate}" th:href="@{/admin/book/cate/{id}(id=${cate.getId()})}" th:attr="cate-id=${cate.id}" class="dropdown-item cate" th:text="${cate.name}"></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+    <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead style="color: #3f51b5">
+        <tr>
+            <th class="th-sm" >QRCODE
+            <th class="th-sm" >Title
+            </th>
+            <th class="th-sm">Author
+            </th>
+            <th class="th-sm">Year
+            </th>
+            <th class="th-sm">Publisher
+            </th>
+            <th class="th-sm">Page
+            </th>
+            <th class="th-sm">Personal
+            </th>
+            <th class="th-sm">ISBN
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm" style="text-align: center">Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="book :${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.year}"></td>
+            <td th:text="${book.publisher}"></td>
+            <td th:text="${book.page}"></td>
+            <td th:text="${book.personal}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:if="${book.status==false}">Brrowed</td>
+            <td th:if="${book.status==true}">Available</td>
+            <td align="center"><a th:attr="book-id=${book.id}" class="delete">  <i class="fas fa-trash-alt fa-lg" style="color: red"></i> </a> <a th:href="@{/admin/book/update/{id}(id=${book.id})}" > <i class="fas fa-edit fa-lg" style="color: darkslateblue"></i> </a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="modalDefaultContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!--Modal: Contact form-->
+        <div class="modal-dialog cascading-modal" role="document">
+
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header info-color white-text">
+                    <h4 class="title">
+                        <i class="fas fa-plus-circle"></i> Create Book</h4>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <form>
+
+
+                    <label for="title">title</label>
+                    <input type="text" id="title" required class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="category">Category</label>
+                    <select class="browser-default custom-select" id="category">
+                        <option th:each="cate : ${cate}" th:text="${cate.name}" th:value="${cate.id}" th:id="${cate.id}"></option>
+
+                    </select>
+
+                    <br><br>
+
+                    <label for="author">author</label>
+                    <input type="text" id="author" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="isbn">isbn</label>
+                    <input type="text" id="isbn" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="page">page</label>
+                    <input type="number" id="page" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="personal">personal</label>
+                    <input type="text" id="personal" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="publisher">publisher</label>
+                    <input type="text" id="publisher" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="year">year</label>
+                    <input type="number" id="year" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="qrcode">QRCODE</label>
+                    <input type="text" required id="qrcode" class="form-control form-control-sm">
+
+
+
+                    <div class="text-center mt-4 mb-2">
+                        <button class="btn btn-info save">create
+                            <i class="fa fa-send ml-2"></i>
+                        </button>
+                    </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+        <!--/Modal: Contact form-->
+    </div>
+</div>
+<script layout:fragment="script">
+    $(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+    var test = $("#adminId");
+    $(".delete").click(function () {
+        var data_id = $(this).attr("book-id");
+            swal({
+                title: "Are you sure to delete book ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/api/v1/book/delete/" + data_id,
+                        type: "DELETE",
+                        success: function (response) {
+                            if (response.status == false){
+                                swal("You cannot delete, This book is refer to other");
+                            }else {
+                                swal("Poof! Your success Delete It", {
+                                    icon: "success",
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            }
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+                }
+                else {
+                    swal("You Have Cancel!");
+        }
+        });
+
+    });
+
+    $(".save").click(function () {
+        var id = $("#qrcode").val();
+        var author = $("#author").val();
+        var isbn = $("#isbn").val();
+        var page = $("#page").val();
+        var personal = $("#personal").val();
+        var publisher = $("#publisher").val();
+        var title = $("#title").val();
+        var year = $("#year").val();
+        var cate_id = $("#category").val();
+        if (id == ""){
+            swal("Please input QRCODE!");
+            return;
+        }
+        if(title==""){
+            swal("Please input book's title!");
+            return;
+        }
+        var book = {
+            "author": author,
+            "id": id,
+            "isbn": isbn,
+            "page": page,
+            "personal": personal,
+            "publisher": publisher,
+            "title": title,
+            "year": year,
+            "category_id": cate_id
+        };
+
+        $.ajax({
+
+            url: "/api/v1/book/create",
+            type: "POST",
+            data: JSON.stringify(book),
+            contentType: "application/json",
+            success: function (resoponse) {
+               if (resoponse.status == false){
+                   this.insert = false;
+               swal("Please input book's title!");
+                }
+            },
+            error: function (error) {
+                swal("save unsueccfully!", "Invalid QRCODE", "error");
+                console.log("error");
+            },
+        });
+
+    });
+</script>
+
+</body>
+
+
+</html>

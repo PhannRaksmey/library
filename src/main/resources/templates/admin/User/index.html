@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" >
+<head>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" th:href="@{/admin/user/create}">
+                        CREATE
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" th:href="@{/admin/user/create}">
+                        <i class="fas fa-plus-circle" data-toggle="modal" data-target="#modalDefaultContactForm"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+    <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead style="color: #3f51b5">
+        <tr>
+            <th class="th-sm" >Profile
+            </th>
+            <th class="th-sm">ID card
+            </th>
+            <th class="th-sm">UserName
+            </th>
+            <th class="th-sm">Phone
+            </th>
+            <th class="th-sm">Address
+            </th>
+            <th class="th-sm">Email
+            </th>
+            <th class="th-sm">Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr td th:each="user :${users}">
+            <td style="text-align: center">
+                <img th:src="${user.profileImg}" style="width:85px; height:60px;">
+            </td >
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.username}"></td>
+            <td align="center"><a th:attr="user-id=${user.id}" class="delete" onclick="test()">  <i class="fas fa-trash-alt fa-lg" style="color: red"></i> </a> <a th:href="@{/admin/user/update/{id}(id=${user.id})}" > <i class="fas fa-edit fa-lg" style="color: darkslateblue"></i> </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script layout:fragment="script">
+    $(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+
+    $(".delete").click(function () {
+        var data_id = $(this).attr("user-id");
+            swal({
+                title: "Are you sure to delete user ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/api/v1/user/delete/" + data_id,
+                        type: "DELETE",
+                        success: function (response) {
+                            if (response.status == false){
+                                swal("You cannot delete, This book is refer to other");
+                            }else {
+                                swal("Poof! Your success Delete It", {
+                                    icon: "success",
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            }
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+                }
+                else {
+                    swal("You Have Cancel!");
+        }
+        });
+
+    });
+
+    $(".save").click(function () {
+        var id = $("#qrcode").val();
+        var author = $("#author").val();
+        var isbn = $("#isbn").val();
+        var page = $("#page").val();
+        var personal = $("#personal").val();
+        var publisher = $("#publisher").val();
+        var title = $("#title").val();
+        var year = $("#year").val();
+        var cate_id = $("#category").val();
+        if (id == ""){
+            swal("Please input QRCODE!");
+            return;
+        }
+        if(title==""){
+            swal("Please input book's title!");
+            return;
+        }
+        var book = {
+            "author": author,
+            "id": id,
+            "isbn": isbn,
+            "page": page,
+            "personal": personal,
+            "publisher": publisher,
+            "title": title,
+            "year": year,
+            "category_id": cate_id
+        };
+
+        $.ajax({
+
+            url: "/api/v1/book/create",
+            type: "POST",
+            data: JSON.stringify(book),
+            contentType: "application/json",
+            success: function (resoponse) {
+               if (resoponse.status == false){
+                   this.insert = false;
+               swal("Please input book's title!");
+                }
+            },
+            error: function (error) {
+                swal("save unsueccfully!", "Invalid QRCODE", "error");
+                console.log("error");
+            },
+        });
+
+    });
+</script>
+
+</body>
+
+
+</html>

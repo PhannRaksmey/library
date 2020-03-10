@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>WU Library</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body style="background-color:#00c853">
+
+<!-- Start your project here-->
+<div>
+
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2"> <i class="fas fa-sign-in-alt"></i> LOG IN</h4>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <form action="/login" method="post">
+                <div class="md-form mb-5">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <input type="text" class="form-control validate" name="username">
+                    <label data-error="wrong" data-success="right" for="form3" >Email</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fas fa-lock prefix grey-text"></i>
+                    <input type="password" class="form-control validate" name="password">
+                    <label data-error="wrong" data-success="right" for="form2">Password</label>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-outline-warning waves-effect">Log in<i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+                </form>
+            </div>
+
+            <!--Footer-->
+
+        </div>
+        <!--/.Content-->
+    </div>
+
+</div>
+<!-- /Start your project here-->
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.js"></script>
+</body>
+
+</html>

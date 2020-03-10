@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" >
+<head>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+                aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modalDefaultContactForm">
+                        CREATE
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light">
+                        <i class="fas fa-plus-circle" data-toggle="modal" data-target="#modalDefaultContactForm"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+    <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead style="color: #3f51b5">
+        <tr>
+            <th class="th-sm">Name
+            </th>
+            <th class="th-sm" style="text-align: center">Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr td th:each="cate :${cates}">
+            <td th:text="${cate.name}"></td>
+            <td align="center">
+                <a th:attr="cate-id=${cate.id}" class="delete">
+                    <i class="fas fa-trash-alt fa-lg" style="color: red"></i>
+                </a>
+
+                <a th:href="@{/admin/category/update/{id}(id=${cate.id})}" >
+                    <i class="fas fa-edit fa-lg" style="color: darkslateblue"></i>
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="modal fade" id="modalDefaultContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!--Modal: Contact form-->
+        <div class="modal-dialog cascading-modal" role="document">
+
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header info-color white-text">
+                    <h4 class="title" style="text-align: center">
+                        CREATE CATEGORY</h4>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+
+                    <label for="qrcode">QRCODE</label>
+                    <input type="text" id="qrcode" class="form-control form-control-sm">
+
+                    <br>
+
+                    <label for="name">name</label>
+                    <input type="text" id="name" class="form-control form-control-sm">
+
+
+                    <div class="text-center mt-4 mb-2">
+                        <button class="btn btn-info" onclick="save()">CREATE
+                            <i class="fa fa-send ml-2"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+        <!--/Modal: Contact form-->
+    </div>
+</div>
+<script layout:fragment="script">
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    $(".delete").click(function () {
+        var data_id= $(this).attr("cate-id");
+        swal({
+            title: "Are you sure to delete category ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/api/v1/admin/cate/delete/" + data_id,
+                    type: "DELETE",
+                    success: function (response) {
+                        if (response.status == false){
+                            swal("Cannot delete, this category refer to book");
+                        }
+                        else {
+                            swal("Poof! Your success Delete It", {
+                                icon: "success",
+                            }).then(function () {
+                                location.reload();
+                            });
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+
+            }
+            else {
+                swal("You Have Cancel!");
+    }
+    });
+
+    });
+    //
+    function save() {
+        var id = $("#qrcode").val();
+        var name = $("#name").val();
+        var cate = {
+            "id": id,
+            "name": name
+        };
+
+        if(id==''){
+            swal("Pleas input QRCODE!");
+            return;
+        }
+        if(name == ''){
+            swal("Pleas input name of category!");
+            return;
+        }
+        $.ajax({
+            url: "/api/v1/admin/cate/create",
+            type: "POST",
+            data: JSON.stringify(cate),
+            contentType: "application/json",
+            success: function (resoponse) {
+                swal("saved!", "", "success");
+                location.reload()
+
+            },
+            error: function (error) {
+                swal("save unsueccfully!", "", "error");
+                console.log(error);
+            },
+        });
+
+    }
+
+</script>
+
+</body>
+
+
+</html>

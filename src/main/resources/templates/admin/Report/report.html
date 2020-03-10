@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/master}" >
+<head>
+</head>
+
+<body>
+<style>
+
+    ::placeholder {
+    color: black;
+    opacity: 2;
+    }
+
+</style>
+
+<div layout:fragment="content">
+    <center>
+        <span class="d-block p-2 bg-info text-white">BOOK REPORT </span>
+
+    </center>
+    <br>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-sm">
+                    <label class="text-primary">From</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <input type="number" id="year" class="form-control form-control-sm" placeholder="Year">
+                </div>
+
+                <div class="col-sm">
+                    <select class="browser-default custom-select">
+                        <option selected>Month</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+                <div class="col-sm">
+                    <select class="browser-default custom-select">
+                        <option selected>Day</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">
+                    <label class="text-primary">To</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <select class="browser-default custom-select">
+                        <option selected>Year</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+                <div class="col-sm">
+                    <select class="browser-default custom-select">
+                        <option selected>Month</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+                <div class="col-sm">
+                    <select class="browser-default custom-select">
+                        <option selected>Day</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+            </div>
+            <br>
+            <center> <input type="submit" class="btn btn-primary btn-sm">  </center>
+        </form>
+    </div>
+
+</div>
+<script layout:fragment="script">
+
+</script>
+
+</body>
+
+
+</html>

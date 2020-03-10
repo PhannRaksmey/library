@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-spring-security"
+>
+<head>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+</div>
+
+<div sec:authorize="isAnonymous()">
+    This content is only shown to isAnonymous
+</div>
+
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    This content is only shown to administrators.
+</div>
+<div sec:authorize="hasRole('ROLE_USER')">
+    This content is only shown to users.
+</div>
+
+Logged user: <span sec:authentication="name"> </span>
+Roles: <span sec:authentication="principal.authorities"></span>
+
+<div th:object="${user}" >
+    <button th:if= "*{status == true}"> delete</button>
+
+    <input th:field="*{status}">
+
+    </input>
+    <button>delete</button>
+</div>
+
+<!--[[${user}]]-->
+[[${user.status}]]
+</body>
+</html>

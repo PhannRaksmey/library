@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar-fixed position-fixed" th:fragment="fr-sidebar">
+
+    <a class="logo-wrapper waves-effect">
+        <img src="https://i1.wp.com/www.studentprojectguide.com/wp-content/uploads/2019/01/Library-Management-System-in-Asp.Net_.png?fit=387%2C242&ssl=1"  class="img-fluid" alt="" height="100%" style="text-align: center" width="100%">
+    </a>
+
+    <div class="list-group list-group-flush">
+        <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/book') ? 'active':''}" th:href="@{/admin/book/all}" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-book mr-3"></i>Book Management
+        </a>
+        <a th:classappend="${#httpServletRequest.getRequestURI().startsWith ('/admin/member') ? 'active':''}" th:href="@{/admin/member/all}" class="list-group-item list-group-item-action waves-effect">
+        <i class="fa fa-user mr-3"></i>Member Registation</a>
+        <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/borrow') ? 'active':''}" th:href="@{/admin/borrow}"class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-table mr-3"></i>Borrow Book</a>
+        <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/return') ? 'active':''}" th:href="@{/admin/return}" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-map mr-3"></i>Retrun Book</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/user') ? 'active':''}" href="/admin/user/all" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-user-edit mr-3"></i>User Management
+        </a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/cate') ? 'active':''}" th:href="@{/admin/cate}" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-layer-group mr-3"></i> Category</a>
+        <a  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin/report') ? 'active':''}" th:href="@{/admin/report}" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-chart-line mr-3"></i> Dashboard</a>
+
+    </div>
+
+</div>
+<!-- Sidebar -->
+</body>
+</html>
